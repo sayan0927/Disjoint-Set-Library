@@ -1,9 +1,4 @@
-package DisjointSet;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -31,7 +26,41 @@ public class UnionFind<T> {
 
     void remove(T object)
     {
-        this.set_holder.remove(object);
+        System.out.println(set_holder);
+        Set<T> toRemove=new HashSet<>();
+        Set<T> toAddAgain=new HashSet<>();
+        for(Map.Entry<T,T> mapEntry:set_holder.entrySet()) {
+            T parent=mapEntry.getValue();
+            T child= mapEntry.getKey();
+
+
+
+            //{0=0, 1=0, 2=0, 3=3, 4=3, 5=3, 6=6, 7=6, 8=6, 9=9}
+            // suppose our set is like this  where key is object and value is represantative
+            // now if  we want to remove 6,then we have to remove 6,7,8 first then add 7,8 again
+
+
+            ////7,8 added to toAddAgain
+            if(parent.equals(object) && !child.equals(object))
+                toAddAgain.add(child);
+
+            // 6,7,8 added to toRemove
+            if(parent.equals(object) || child.equals(object))
+                toRemove.add(child);
+
+        }
+
+        //removing 6,7,8
+        for(T obj:toRemove)
+            set_holder.remove(obj);
+
+        //making new set of 7,8
+        for(T obj:toAddAgain)
+            makeSet(obj);
+
+        System.out.println(set_holder);
+
+
     }
 
     public T find(T object)
@@ -62,6 +91,7 @@ public class UnionFind<T> {
 
     private T unionByRank(T x,T y)
     {
+
         T x_rep= findByPathCompression(x);
         T y_rep= findByPathCompression(y);
 
