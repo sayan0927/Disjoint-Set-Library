@@ -24,10 +24,17 @@ public class UnionFind<T> {
         rank.put(object,0);
     }
 
+    boolean isConnected(T x,T y)
+    {
+        //returns true if x and y in same disjoint set
+
+        return set_holder.get(x).equals(set_holder.get(y));
+    }
 
     void remove(T object)
     {
 
+        
         Set<T> toRemove=new HashSet<>();
         Set<T> toAddAgain=new HashSet<>();
 
@@ -53,15 +60,17 @@ public class UnionFind<T> {
         }
 
         //removing 6,7,8
-        for(T obj:toRemove)
+        for(T obj:toRemove) {
             set_holder.remove(obj);
+            rank.remove(obj);
+        }
 
         //making new set of 7,8
         for(T obj:toAddAgain)
             makeSet(obj);
 
 
-
+    
 
     }
 
