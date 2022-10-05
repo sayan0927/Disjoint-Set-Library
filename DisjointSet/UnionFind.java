@@ -4,6 +4,7 @@ import java.util.stream.Stream;
 
 public class UnionFind<T> {
 
+    //holds the set objects where key is the object and value is the representative
     private Map<T,T> set_holder;
 
     private Map<T,Integer> rank;
@@ -37,7 +38,7 @@ public class UnionFind<T> {
 
 
             //{0=0, 1=0, 2=0, 3=3, 4=3, 5=3, 6=6, 7=6, 8=6, 9=9}
-            // suppose our set is like this  where key is object and value is represantative
+            // suppose our set is like this  where key is object and value is representative
             // now if  we want to remove 6,then we have to remove 6,7,8 first then add 7,8 again
 
 
@@ -59,7 +60,7 @@ public class UnionFind<T> {
         for(T obj:toAddAgain)
             makeSet(obj);
 
-        
+
 
 
     }
