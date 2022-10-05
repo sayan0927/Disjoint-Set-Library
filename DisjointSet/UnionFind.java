@@ -26,9 +26,10 @@ public class UnionFind<T> {
 
     void remove(T object)
     {
-        System.out.println(set_holder);
+
         Set<T> toRemove=new HashSet<>();
         Set<T> toAddAgain=new HashSet<>();
+
         for(Map.Entry<T,T> mapEntry:set_holder.entrySet()) {
             T parent=mapEntry.getValue();
             T child= mapEntry.getKey();
@@ -40,7 +41,7 @@ public class UnionFind<T> {
             // now if  we want to remove 6,then we have to remove 6,7,8 first then add 7,8 again
 
 
-            ////7,8 added to toAddAgain
+            //7,8 added to toAddAgain
             if(parent.equals(object) && !child.equals(object))
                 toAddAgain.add(child);
 
@@ -58,7 +59,7 @@ public class UnionFind<T> {
         for(T obj:toAddAgain)
             makeSet(obj);
 
-        System.out.println(set_holder);
+        
 
 
     }
