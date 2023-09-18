@@ -58,7 +58,7 @@ public class DisjointSetForest<T> implements DisjointSet<T>{
     }
 
 
-
+    @Deprecated
     void remove(T object)
     {
 
